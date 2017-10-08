@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+@withRouter
+
+@connect(
+  state => ({ authenticated: state.auth.authenticated }),
+)
+
 export default function(ComposedComponent) {
-  class Authentication extends Component {
+  return class Authentication extends Component {
 
     componentWillMount() {
       if (!this.props.authenticated) {
@@ -13,7 +19,7 @@ export default function(ComposedComponent) {
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.props.history.push('/');
+        this.props.history.push('/')
       }
     }
 
@@ -21,10 +27,4 @@ export default function(ComposedComponent) {
       return <ComposedComponent {...this.props} />
     }
   }
-
-  function mapStateToProps(state) {
-    return { authenticated: state.auth.authenticated }
-  }
-
-  return withRouter(connect(mapStateToProps)(Authentication))
 }

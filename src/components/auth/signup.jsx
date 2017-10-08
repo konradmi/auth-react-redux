@@ -4,7 +4,20 @@ import * as actions from '../../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-class Signup extends Component {
+@withRouter
+
+@reduxForm({
+  form: 'signup',
+  fields: ['email', 'password', 'passwordConfirm'],
+  validate
+})
+
+@connect(
+  state => ({ errorMessage: state.auth.error }),
+  actions,
+)
+
+export default class Signup extends Component {
 
   handleFormSubmit = formProps => this.props.signupUser(formProps, this.props.history)
 
@@ -69,13 +82,3 @@ const validate = formProps => {
 
   return errors
 }
-
-function mapStateToProps(state) {
-  return { errorMessage: state.auth.error }
-}
-
-export default withRouter(reduxForm({
-  form: 'signup',
-  fields: ['email', 'password', 'passwordConfirm'],
-  validate
-})(connect(mapStateToProps, actions)(Signup)))
