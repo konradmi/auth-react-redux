@@ -16,7 +16,7 @@ import Feature from './components/feature'
 import Welcome from './components/welcome'
 import reducers from './reducers'
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 
 const store = createStoreWithMiddleware(reducers)
 
