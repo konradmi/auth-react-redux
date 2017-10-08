@@ -9,6 +9,7 @@ class Feature extends Component {
   }
 
   render() {
+    console.log('feature', this.props)
     return (
       <div>{this.props.message}</div> 
     )
