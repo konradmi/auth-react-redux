@@ -4,6 +4,12 @@ import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE } from './types'
 
 const ROOT_URL = 'http://localhost:3090'
 
+export const authError = error => ({
+  type: AUTH_ERROR,
+  payload: error,
+})
+
+
 export const signinUser = ({ email, password }) => (dispatch) => {
   axios.post(`${ROOT_URL}/signin`, { email, password })
     .then(response => {
@@ -15,11 +21,6 @@ export const signinUser = ({ email, password }) => (dispatch) => {
       dispatch(authError('Bad login info'))
     })
 }
-
-export const authError = error => ({
-  type: AUTH_ERROR,
-  payload: error,
-})
 
 export const signoutUser = () => {
   localStorage.removeItem('token')
@@ -39,9 +40,9 @@ export const signupUser = ({ email, password }) => (dispatch) =>
       dispatch(authError('Email in use'))
     })
 
-export const fetchMessage = () => (dispatch) => 
+export const fetchMessage = () => (dispatch) =>
   axios.get(ROOT_URL, {
     headers: { authorization: localStorage.getItem('token') }
   })
-  .then(response => dispatch({type: FETCH_MESSAGE, payload: response.data.message}))
+  .then(response => dispatch({type: FETCH_MESSAGE, payload: response.data.message }))
   .catch(error => console.log(error.response))
