@@ -10,7 +10,7 @@ class Signup extends Component {
   renderAlert() {
     if(this.props.errorMessage) {
       return(
-        <div className='alert alert-danger'>
+        <div>
           <strong> Ooops! </strong> {this.props.errorMessage}
         </div>
       )
@@ -21,17 +21,17 @@ class Signup extends Component {
   	const { handleSubmit, fields:{email, password, passwordConfirm}} = this.props
   	return (
   	  <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-        <fieldset className="form-group">
+        <fieldset>
           <Field component={renderField} name='email' label='Email: '/>
         </fieldset>
-        <fieldset className="form-group">
+        <fieldset>
           <Field component={renderField} type='password' name='password' label='Password:'/>
         </fieldset>
-        <fieldset className="form-group">
+        <fieldset>
           <Field component={renderField} type='password' name='passwordConfirm' label='Confirm Password: '/>
         </fieldset>
         {this.renderAlert()}
-        <button action='submit' className='btn btn-primary'>Sign up</button>
+        <button action='submit'>Sign up</button>
   	  </form>
   	)
   }
@@ -41,7 +41,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} className='form-control'/>
+      <input {...input} placeholder={label} type={type}/>
       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
     </div>
   </div>
