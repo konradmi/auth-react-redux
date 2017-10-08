@@ -16,17 +16,15 @@ export const signinUser = ({ email, password }) => (dispatch) => {
     })
 }
 
-export const authError = error => {
-  return {
-  	type: AUTH_ERROR,
-  	payload: error
-  }
-}
+export const authError = error => ({
+  type: AUTH_ERROR,
+  payload: error,
+})
 
 export const signoutUser = () => {
   localStorage.removeItem('token')
   return {
-    type: UNAUTH_USER
+    type: UNAUTH_USER,
   }
 }
 
@@ -47,16 +45,3 @@ export const fetchMessage = () => (dispatch) =>
   })
   .then(response => dispatch({type: FETCH_MESSAGE, payload: response.data.message}))
   .catch(error => console.log(error.response))
-
-
-// export const fetchMessage = () => {
-//   const request = axios.get(ROOT_URL, {
-//     headers: { authorization: localStorage.getItem('token') }
-//   })
-  
-//   return {
-//     type: FETCH_MESSAGE,
-//     payload: request
-//   }
-// }
-
