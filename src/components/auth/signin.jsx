@@ -25,7 +25,7 @@ export default class Signin extends Component {
   renderAlert() {
     if(this.props.errorMessage) {
       return(
-        <div className='alert alert-danger'>
+        <div>
           <strong> Ooops! </strong> {this.props.errorMessage}
         </div>
       )
@@ -37,16 +37,16 @@ export default class Signin extends Component {
 
   	return (
   	  <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-        <fieldset className='form-group'>
+        <fieldset>
           <label>Email:</label>
-          <Field component='input' name='email' className='form-control'/>
+          <Field component='input' name='email'/>
         </fieldset>
-        <fieldset className='form-group'>
+        <fieldset>
           <label>Password:</label>
-          <Field component='input' type='password' name='password' className='form-control'/>
+          <Field component='input' type='password' name='password'/>
         </fieldset>
         {this.renderAlert()}
-        <button action='submit' className='btn btn-primary'>Sign in </button>
+        <button action='submit'>Sign in </button>
   	  </form>
   	 )
   }
