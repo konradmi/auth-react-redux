@@ -27,6 +27,7 @@ export default class Signup extends Component {
     errorMessage: PropTypes.string,
     handleSubmit: PropTypes.func.isRequired,
     fields: PropTypes.array.isRequired,
+    history: PropTypes.object.isRequired,
   }
 
   defaultProps = {
@@ -35,15 +36,11 @@ export default class Signup extends Component {
 
   handleFormSubmit = formProps => this.props.signupUser(formProps, this.props.history)
 
-  renderAlert() {
-    const { errorMessage } = this.props
-
-    return errorMessage && (
-      <div>
-        <strong> Ooops! </strong> {errorMessage}
-      </div>
-    )
-  }
+  renderAlert = () => this.props.errorMessage && (
+    <div>
+      <strong> Ooops! </strong> {errorMessage}
+    </div>
+  )
 
   render() {
   	const { handleSubmit, fields:{email, password, passwordConfirm}} = this.props

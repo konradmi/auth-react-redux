@@ -36,15 +36,11 @@ export default class Signin extends Component {
     signinUser({ email, password }, history)
   }
 
-  renderAlert() {
-    const { errorMessage } = this.props
-    
-    return errorMessage && (
-      <div>
-        <strong> Ooops! </strong> {errorMessage}
-      </div>
-    )
-  }
+  renderAlert = () => this.props.errorMessage && (
+    <div>
+      <strong> Ooops! </strong> {errorMessage}
+    </div>
+  )
 
   render() {
   	const { handleSubmit } = this.props

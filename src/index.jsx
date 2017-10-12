@@ -7,7 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import reduxThunk from 'redux-thunk'
 
 import { AUTH_USER } from './actions/types'
-import App from './components/app'
+import App from './components/App'
 import reducers from './reducers'
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)

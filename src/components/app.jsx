@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Header from './header'
-import Signin from './auth/signin'
-import Signout from './auth/signout'
-import Signup from './auth/signup'
-import RequireAuth from './auth/require_auth'
-import Feature from './feature'
-import Welcome from './welcome'
+import Header from './Header'
+import Signin from './auth/Signin'
+import Signout from './auth/Signout'
+import Signup from './auth/Signup'
+import RequireAuth from './auth/RequireAuth'
+import Feature from './Feature'
+import Welcome from './Welcome'
 
 export default class App extends Component {
   render() {
