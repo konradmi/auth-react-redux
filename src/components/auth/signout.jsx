@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
 import * as actions from '../../actions'
 
-class Signout extends Component {
+@connect(null, actions)
+
+export default class Signout extends Component {
+  static propTypes = {
+    signoutUser: PropTypes.func.isRequired,
+  }
+
   componentWillMount() {
     this.props.signoutUser()
   }
@@ -11,5 +19,3 @@ class Signout extends Component {
     return <div> Sorry to see you go... </div>
   }
 }
-
-export default connect(null, actions)(Signout)

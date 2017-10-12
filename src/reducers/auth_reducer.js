@@ -5,7 +5,13 @@ import {
   FETCH_MESSAGE,
 } from '../actions/types'
 
-export default function(state = {}, action) {
+const initialState = {
+  error: '',
+  authenticated: false,
+  message: ''
+}
+
+export default function(state = initialState, action) {
   switch(action.type) {
     case AUTH_USER:
       return { ...state, error: '', authenticated: true }

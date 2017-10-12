@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import * as actions from '../../actions'
 
@@ -18,18 +19,31 @@ import * as actions from '../../actions'
 
 export default class Signin extends Component {
 
+  static propTypes = {
+    signinUser: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    errorMessage: PropTypes.string,
+  }
+
+  defaultProps = {
+    errorMessage: '',
+  }
+
   handleFormSubmit = ( { email, password } ) => {
-    this.props.signinUser({ email, password }, this.props.history)
+    const { signinUser, history } = this.props
+    
+    signinUser({ email, password }, history)
   }
 
   renderAlert() {
-    if(this.props.errorMessage) {
-      return(
-        <div>
-          <strong> Ooops! </strong> {this.props.errorMessage}
-        </div>
-      )
-    }
+    const { errorMessage } = this.props
+    
+    return errorMessage && (
+      <div>
+        <strong> Ooops! </strong> {errorMessage}
+      </div>
+    )
   }
 
   render() {

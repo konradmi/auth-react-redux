@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
-import * as actions from '../../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import validate from '../../validators/signup-validators'
+import * as actions from '../../actions'
 
 @withRouter
 
@@ -19,16 +22,27 @@ import { withRouter } from 'react-router-dom'
 
 export default class Signup extends Component {
 
+  static propTypes = {
+    signupUser: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string,
+    handleSubmit: PropTypes.func.isRequired,
+    fields: PropTypes.array.isRequired,
+  }
+
+  defaultProps = {
+    errorMessage: '',
+  }
+
   handleFormSubmit = formProps => this.props.signupUser(formProps, this.props.history)
 
   renderAlert() {
-    if(this.props.errorMessage) {
-      return(
-        <div>
-          <strong> Ooops! </strong> {this.props.errorMessage}
-        </div>
-      )
-    }
+    const { errorMessage } = this.props
+
+    return errorMessage && (
+      <div>
+        <strong> Ooops! </strong> {errorMessage}
+      </div>
+    )
   }
 
   render() {
@@ -60,25 +74,3 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
     </div>
   </div>
 )
-
-const validate = formProps => {
-  const errors = {}
-
-  if(!formProps.email) {
-    errors.email = 'Please enter an email'	
-  }
-
-  if(!formProps.password) {
-    errors.password = 'Please enter a password'	
-  }
-
-  if(!formProps.passwordConfirm) {
-    errors.passwordConfirm = 'Please enter a password confirmation'	
-  }
-  
-  if(formProps.password !== formProps.passwordConfirm) {
-  	errors.password = 'Passwords must match'
-  }
-
-  return errors
-}

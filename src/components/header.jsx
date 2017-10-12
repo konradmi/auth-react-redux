@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 @connect(
   state => ({authenticated: state.auth.authenticated}),
 )
 
 export default class Header extends Component {
+
+  static propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+  }
 
   renderLinks() {
     if (this.props.authenticated) {

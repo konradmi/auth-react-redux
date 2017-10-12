@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
 import * as actions from '../actions'
 
-class Feature extends Component {
+@connect(
+  state => ({message: state.auth.message}),
+  actions
+)
+
+export default class Feature extends Component {
+
+  static propTypes = {
+    fetchMessage: PropTypes.func.isRequired,
+    message: PropTypes.string.isRequired,
+  }
 	
   componentWillMount() {
     this.props.fetchMessage()
   }
 
   render() {
-    console.log('feature', this.props)
     return (
       <div>{this.props.message}</div> 
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  message: state.auth.message
-})
-
-export default connect(mapStateToProps, actions)(Feature)

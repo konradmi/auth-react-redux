@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 @withRouter
 
@@ -10,6 +11,11 @@ import { withRouter } from 'react-router-dom'
 
 export default function(ComposedComponent) {
   return class Authentication extends Component {
+    
+    static propTypes = {
+      authenticated: PropTypes.bool.isRequired,
+      history: PropTypes.object.isRequired,
+    }
 
     componentWillMount() {
       if (!this.props.authenticated) {
